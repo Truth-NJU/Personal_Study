@@ -1,0 +1,36 @@
+public class TreeInt {
+    private int[] tree;
+    private int[] nums;
+
+    public TreeInt(int[] nums) {
+        // 在nums的基础上构造树状数组
+        this.nums=nums;
+        // 树状数组的下标从1开始，因此长度为nums.length+1
+        this.tree=new int[nums.length+1];
+        for(int i=0;i<nums.length;i++){
+            updateTree(i+1,nums[i]);
+        }
+    }
+
+    public int lowBit(int x){
+        return x&-x;
+    }
+
+    // 更新树状数组的值，tree[index]+k
+    public void updateTree(int index,int k){
+        while(index<tree.length){
+            tree[index]+=k;
+            index+=lowBit(index);
+        }
+    }
+
+    // 计算前index-1个数的和
+    public int getSum(int index){
+        int res=0;
+        while(index>0){
+            res+=tree[index];
+            index-=lowBit(index);
+        }
+        return res;
+    }
+}

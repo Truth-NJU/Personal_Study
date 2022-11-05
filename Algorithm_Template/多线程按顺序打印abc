@@ -1,0 +1,80 @@
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class mutliProcess {
+    private volatile int flag = 1;
+    private final Object object = new Object();
+
+    public static void main(String[] args) {
+        mutliProcess mutliProcess = new mutliProcess();
+
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 10; i++) {
+                    synchronized (mutliProcess.object) {
+                        if (mutliProcess.flag == 1) {
+                            System.out.println("A");
+                            mutliProcess.flag = 2;
+                            mutliProcess.object.notifyAll();
+                        } else {
+                            try {
+                                mutliProcess.object.wait();
+                                i--;
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        Thread b = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 10; i++) {
+                    synchronized (mutliProcess.object) {
+                        if (mutliProcess.flag == 2) {
+                            System.out.println("B");
+                            mutliProcess.flag = 3;
+                            mutliProcess.object.notifyAll();
+                        } else {
+                            try {
+                                mutliProcess.object.wait();
+                                i--;
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        Thread c = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 10; i++) {
+                    synchronized (mutliProcess.object) {
+                        if (mutliProcess.flag == 3) {
+                            System.out.println("C");
+                            mutliProcess.flag = 1;
+                            mutliProcess.object.notifyAll();
+                        } else {
+                            try {
+                                mutliProcess.object.wait();
+                                i--;
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        a.start();
+        b.start();
+        c.start();
+    }
+}

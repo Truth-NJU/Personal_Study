@@ -1,0 +1,26 @@
+public int[] quicksort(int[] nums,int low, int high) {
+        int i = low, j = high;
+        int target = nums[low];
+        while (i < j) {
+            while (i < j && nums[j] > target) {
+                j--;
+            }
+            while (i < j && nums[i] < target) {
+                i++;
+            }
+            if (nums[i]==nums[j] && i < j) {
+                i++;
+            }else{
+                int tmp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = tmp;
+            }
+        }
+        if (i - 1 > low) {
+            quicksort(nums,low, i - 1);
+        }
+        if (j + 1 < high) {
+            quicksort(nums,j + 1, high);
+        }
+        return nums;
+    }

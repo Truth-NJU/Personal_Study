@@ -1,0 +1,89 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class LRUCache {
+
+    public class LinkListNode {
+        int key;
+        int val;
+        LinkListNode pre, next;
+
+        public LinkListNode() {
+        }
+
+        public LinkListNode(int _key, int _value) {
+            key = _key;
+            val = _value;
+        }
+    }
+
+    Map<Integer, Integer> kTov;
+
+    // 最久没有被使用的放在尾部
+    LinkListNode head=new LinkListNode();
+    LinkListNode tail=new LinkListNode();
+
+    int capacity;
+
+    int size=0;
+
+    public LRUCache(int capacity) {
+        kTov = new HashMap<>();
+        this.capacity = capacity;
+        head.next=tail;
+        tail.pre=head;
+
+    }
+
+    public int get(int key) {
+        if(kTov.containsKey(key)){
+            LinkListNode node=new LinkListNode(key,kTov.get(key));
+            removeNode(node);
+            addToHead(node);
+            return kTov.get(key);
+        }
+        return -1;
+    }
+
+    public void put(int key, int value) {
+        size++;
+        LinkListNode node=new LinkListNode(key,value);
+        if(get(key)!=-1){
+            LinkListNode node1=new LinkListNode(key,get(key));
+            removeNode(node1);
+            kTov.replace(key,value);
+            addToHead(node);
+        }else{
+            kTov.put(key,value);
+            if(size<capacity){
+                size++;
+                addToHead(node);
+            }else{
+                kTov.remove(tail.key);
+                removeTail();
+                addToHead(node);
+            }
+        }
+
+    }
+
+    private void addToHead(LinkListNode node) {
+        node.pre = head;
+        node.next = head.next;
+        head.next.pre = node;
+        head.next = node;
+    }
+
+    private void removeNode(LinkListNode node) {
+        node.pre.next = node.next;
+        node.next.pre = node.pre;
+    }
+
+
+    private LinkListNode removeTail() {
+        LinkListNode res = tail.pre;
+        removeNode(res);
+        return res;
+    }
+
+}
