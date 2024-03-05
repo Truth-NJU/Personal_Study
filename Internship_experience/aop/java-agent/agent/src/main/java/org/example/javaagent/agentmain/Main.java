@@ -7,6 +7,7 @@ import com.sun.tools.attach.VirtualMachine;
 
 import java.io.IOException;
 
+// 在JVM 启动后通过 Attach(pid) 远程加载。
 public class Main {
     public static void main(String[] args) throws AgentLoadException, IOException, AgentInitializationException, AttachNotSupportedException {
         // 先运行Base类的main方法，得到其对应的jvm pid，再修改下面的VirtualMachine.attach("")中的参数
