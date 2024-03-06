@@ -5,3 +5,8 @@
 5. ./sandbox.sh -p 41280 挂载沙箱，其中41280替换为运行的程序的pid号，可以用ps -ef|grep java命令查询对应的pid号
 6. ./sandbox.sh -p 41280 -l查询沙箱挂载了的模块
 7. ./sandbox.sh -p 41280 -d 'base-aop/aop'，触发BaseModule#baseAop方法运行，进行字节码增强
+
+参考：
+1. https://github.com/alibaba/jvm-sandbox/wiki/MDEV-FIRST-MODULE
+2. https://juejin.cn/column/7099445292600131614
+3. https://xie.infoq.cn/article/c5be9834709f7eb48cfa683b1
