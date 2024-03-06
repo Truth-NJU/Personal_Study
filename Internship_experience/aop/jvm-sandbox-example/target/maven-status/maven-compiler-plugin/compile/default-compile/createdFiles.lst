@@ -1,0 +1,7 @@
+org/example/Base.class
+org/example/BaseModule$1.class
+org/example/BrokenClockTinkerModule.class
+org/example/BaseModule.class
+org/example/BrokenClockTinkerModule$1.class
+org/example/Clock.class
+META-INF/services/com.alibaba.jvm.sandbox.api.Module
