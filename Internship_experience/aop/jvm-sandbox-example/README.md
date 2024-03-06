@@ -10,6 +10,7 @@
 10. ./sandbox.sh -p 41280 启动沙箱，其中41280替换为运行的程序的pid号，可以用ps -ef|grep java命令查询对应的pid号
 11. ./sandbox.sh -p 41280 -l 查询沙箱挂载了的模块
 12. ./sandbox.sh -p 41280 -d 'base-aop/aop'，触发BaseModule#baseAop方法运行，进行字节码增强
+13. ./sandbox.sh -p 41280 -S 卸载沙箱模块
 
 参考：
 1. https://github.com/alibaba/jvm-sandbox/wiki/MDEV-FIRST-MODULE
