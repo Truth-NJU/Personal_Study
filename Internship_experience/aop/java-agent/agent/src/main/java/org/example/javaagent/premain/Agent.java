@@ -6,7 +6,6 @@ import java.lang.instrument.Instrumentation;
 // 在 premain 方法中可以对加载前的 class 文件进行修改。
 public class Agent {
     // premain随Java进程启动而启动，经常见到的java -agentlib就是这种方式
-    // 也是在类加载之后对类做修改
     public static void premain(String agentArgs, Instrumentation instrumentation)  {
 //        new AgentBuilder()
         instrumentation.addTransformer(new ClassFileTransformerDemo());

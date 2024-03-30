@@ -8,7 +8,7 @@ import java.lang.instrument.Instrumentation;
 // 这样，当Agent被Attach到一个JVM中时，就会执行类字节码替换并重载入JVM的操作。
 public class TestAgent {
     // agentmain可以在代码运行后动态修改已经加载的类，进行字节码增强
-    // 也是在类加载之后对类做修改
+    // 在类加载之后对类做修改
     public static void agentmain(String args, Instrumentation inst) {
         //指定我们自己定义的Transformer，在其中利用Javassist做字节码替换
         inst.addTransformer(new TestTransformer(), true);
