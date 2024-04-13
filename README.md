@@ -1,9 +1,8 @@
 # Personal_Study
 
-**Internship_experience** 总结了实习经验
-
-**Interview-java** 记录了一些面试题目
-
-**Algorithm_Template** 整理了一些常见的算法模板
-
-**Technology_learning**是一些技术的学习文档
+```
+├── Algorithm_Template 常见算法模板
+├── Internship_experience 实习项目的总结
+├── Interview-Java 面试经验
+└── Technology_learning 技术学习
+```
